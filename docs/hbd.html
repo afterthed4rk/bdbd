@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #a8e2e2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .cake-container {
+            position: relative;
+            margin: 50px auto;
+        }
+
+        /* Plate */
+        .plate {
+            width: 280px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            animation: plateAppear 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .plate::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 10%;
+            width: 80%;
+            height: 5px;
+            background: #e8e8e8;
+            border-radius: 50%;
+        }
+
+        @keyframes plateAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cake Layers */
+        .cake {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .layer {
+            width: 200px;
+            height: 35px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            transform: translateY(-50px) scale(0.8);
+        }
+
+        .layer-bottom {
+            background: #8B6F47;
+            border-radius: 5px;
+            animation: layerAppear 0.6s ease-out 0.5s forwards;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .layer-middle {
+            background: #A0826D;
+            border-radius: 5px;
+            margin-top: -3px;
+            animation: layerAppear 0.6s ease-out 1.1s forwards;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .layer-top {
+            background: #8B6F47;
+            border-radius: 5px;
+            margin-top: -3px;
+            animation: layerAppear 0.6s ease-out 1.7s forwards;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes layerAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Frosting - matching original image */
+        .frosting {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 210px;
+            height: 12px;
+            background: #F5DEB3;
+            border-radius: 20px 20px 0 0;
+            opacity: 0;
+            animation: frostingAppear 0.5s ease-out 2.3s forwards;
+        }
+
+        .frosting-drip {
+            position: absolute;
+            background: #F5DEB3;
+            border-radius: 0 0 8px 8px;
+            top: 8px;
+        }
+
+        /* Varied drip sizes to match original */
+        .drip1 { 
+            left: 25px; 
+            width: 20px;
+            height: 18px;
+        }
+        
+        .drip2 { 
+            left: 55px; 
+            width: 25px;
+            height: 22px;
+        }
+        
+        .drip3 { 
+            left: 90px; 
+            width: 30px;
+            height: 25px;
+        }
+        
+        .drip4 { 
+            left: 130px; 
+            width: 22px;
+            height: 20px;
+        }
+        
+        .drip5 { 
+            left: 165px; 
+            width: 20px;
+            height: 18px;
+        }
+
+        @keyframes frostingAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Candle */
+        .candle {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ff6b6b 0%, #ff8787 100%);
+            border-radius: 2px;
+            opacity: 0;
+            animation: candleAppear 0.5s ease-out 2.8s forwards;
+        }
+
+        @keyframes candleAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .wick {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 6px;
+            background: #333;
+        }
+
+        /* Flame */
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 18px;
+            background: #ffd700;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 15px #ffd700, 0 0 25px #ff6b6b;
+            animation: flicker 0.3s ease-in-out 3.3s infinite alternate, flameAppear 0.5s ease-out 3.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes flameAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scaleY(1);
+            }
+            100% {
+                transform: translateX(-50%) scaleY(1.1);
+            }
+        }
+
+        .flame::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 7px;
+            height: 10px;
+            background: #ff6b6b;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        /* Text */
+        h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin-top: 40px;
+            opacity: 0;
+            animation: textAppear 1s ease-out 3.8s forwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .name {
+            color: rgb(120, 68, 241);
+            font-size: 1.3em;
+            margin-top: 10px;
+            opacity: 0;
+            animation: textAppear 1s ease-out 4.3s forwards;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes textAppear {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            opacity: 0;
+            animation: confettiFall 3s ease-out 4.5s infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(600px) rotate(720deg);
+            }
+        }
+
+        .confetti:nth-child(1) { left: 10%; background: #ff6b6b; animation-delay: 4.5s; }
+        .confetti:nth-child(2) { left: 20%; background: #ffd700; animation-delay: 4.7s; }
+        .confetti:nth-child(3) { left: 30%; background: #4ecdc4; animation-delay: 4.9s; }
+        .confetti:nth-child(4) { left: 40%; background: #ff6b6b; animation-delay: 5.1s; }
+        .confetti:nth-child(5) { left: 50%; background: #95e1d3; animation-delay: 5.3s; }
+        .confetti:nth-child(6) { left: 60%; background: #ffd700; animation-delay: 5.5s; }
+        .confetti:nth-child(7) { left: 70%; background: #ff6b6b; animation-delay: 5.7s; }
+        .confetti:nth-child(8) { left: 80%; background: #4ecdc4; animation-delay: 5.9s; }
+        .confetti:nth-child(9) { left: 90%; background: #ffd700; animation-delay: 6.1s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+
+        <div class="cake-container">
+            <div class="cake">
+                <div class="layer layer-top">
+                    <div class="frosting">
+                        <div class="frosting-drip drip1"></div>
+                        <div class="frosting-drip drip2"></div>
+                        <div class="frosting-drip drip3"></div>
+                        <div class="frosting-drip drip4"></div>
+                        <div class="frosting-drip drip5"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="wick"></div>
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <div class="layer layer-middle"></div>
+                <div class="layer layer-bottom"></div>
+            </div>
+            <div class="plate"></div>
+        </div>
+
+        <h1>happy birthday!</h1>
+        <p class="name">🎉 Deepa 🎉</p>
+    </div>
+</body>
+</html>
