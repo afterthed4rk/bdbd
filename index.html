@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+background: #e3fdfd;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+font-family: 'Arial', sans-serif;
+overflow: hidden;
+}
+/* Curtain Container */
+.curtain-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 9999;
+pointer-events: none;
+}
+/* Left Curtain */
+.curtain-left {
+position: absolute;
+top: 0;
+left: 0;
+width: 50%;
+height: 100%;
+background: linear-gradient(to right, #ffffff 0%, #f5f5f5 100%);
+box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+transition: transform 1.5s ease-in-out;
+z-index: 10000;
+}
+/* Right Curtain */
+.curtain-right {
+position: absolute;
+top: 0;
+right: 0;
+width: 50%;
+height: 100%;
+background: linear-gradient(to left, #ffffff 0%, #f5f5f5 100%);
+box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+transition: transform 1.5s ease-in-out;
+z-index: 10000;
+}
+/* Curtain folds effect */
+.curtain-left::before,
+.curtain-right::before {
+content: '';
+position: absolute;
+top: 0;
+width: 100%;
+height: 100%;
+background: repeating-linear-gradient(
+90deg,
+transparent,
+transparent 40px,
+rgba(0, 0, 0, 0.05) 40px,
+rgba(0, 0, 0, 0.05) 80px
+);
+}
+/* Clickable Emoji Container */
+.bow-container {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 10001;
+cursor: pointer;
+pointer-events: all;
+animation: shake 0.8s ease-in-out infinite;
+/* Flex properties to center the emoji if it were multiple elements */
+display: flex;
+justify-content: center;
+align-items: center;
+/* No fixed width/height needed here, emoji will define size */
+}
+@keyframes shake {
+0%, 100% {
+transform: translate(-50%, -50%) rotate(0deg);
+}
+25% {
+transform: translate(-50%, -50%) rotate(-5deg);
+}
+75% {
+transform: translate(-50%, -50%) rotate(5deg);
+}
+}
+/* 🎀 START OF EMOJI BOW STYLES 🎀 */
+/* The element that contains the actual emoji */
+.emoji-bow {
+    font-size: 100px; /* Make the emoji very large */
+    line-height: 1; /* Ensure it doesn't add extra space */
+    text-shadow: 2px 2px 8px lightgoldenrodyellow; /* Soft pink shadow */
+    transition: transform 0.2s ease-out;
+}
+/* Add a slight effect on hover */
+.bow-container:hover .emoji-bow {
+    transform: scale(1.1);
+}
+/* 🎀 END OF EMOJI BOW STYLES 🎀 */
+/* Open curtains */
+.curtain-open .curtain-left {
+transform: translateX(-100%);
+}
+.curtain-open .curtain-right {
+transform: translateX(100%);
+}
+.curtain-open .bow-container { /* This will fade out the emoji bow */
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.5s ease-out;
+}
+.container {
+text-align: center;
+position: relative;
+}
+.cake-container {
+position: relative;
+margin: 50px auto;
+}
+/* Plate */
+.plate {
+width: 280px;
+height: 12px;
+background: #ffffff;
+border-radius: 50%;
+position: relative;
+margin: 0 auto;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+animation: plateAppear 0.5s ease-out forwards;
+opacity: 0;
+transform: translateY(20px);
+}
+.plate::after {
+content: '';
+position: absolute;
+bottom: -3px;
+left: 10%;
+width: 80%;
+height: 5px;
+background: #e8e8e8;
+border-radius: 50%;
+}
+@keyframes plateAppear {
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+/* Cake Layers */
+.cake {
+position: relative;
+margin: 0 auto;
+}
+.layer {
+width: 200px;
+height: 35px;
+margin: 0 auto;
+position: relative;
+opacity: 0;
+transform: translateY(-50px) scale(0.8);
+}
+.layer-bottom {
+background: #8B6F47;
+border-radius: 5px;
+animation: layerAppear 0.6s ease-out 0.5s forwards;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.layer-middle {
+background: #A0826D;
+border-radius: 5px;
+margin-top: -3px;
+animation: layerAppear 0.6s ease-out 1.1s forwards;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.layer-top {
+background: #8B6F47;
+border-radius: 5px;
+margin-top: -3px;
+animation: layerAppear 0.6s ease-out 1.7s forwards;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+@keyframes layerAppear {
+to {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+}
+/* Frosting - matching original image */
+.frosting {
+position: absolute;
+top: -5px;
+left: 50%;
+transform: translateX(-50%);
+width: 210px;
+height: 12px;
+background: #F5DEB3;
+border-radius: 20px 20px 0 0;
+opacity: 0;
+animation: frostingAppear 0.5s ease-out 2.3s forwards;
+}
+.frosting-drip {
+position: absolute;
+background: #F5DEB3;
+border-radius: 0 0 8px 8px;
+top: 8px;
+}
+/* Varied drip sizes to match original */
+.drip1 {
+left: 25px;
+width: 20px;
+height: 18px;
+}
+.drip2 {
+left: 55px;
+width: 25px;
+height: 22px;
+}
+.drip3 {
+left: 90px;
+width: 30px;
+height: 25px;
+}
+.drip4 {
+left: 130px;
+width: 22px;
+height: 20px;
+}
+.drip5 {
+left: 165px;
+width: 20px;
+height: 18px;
+}
+@keyframes frostingAppear {
+to {
+opacity: 1;
+}
+}
+/* Candle */
+.candle {
+position: absolute;
+top: -50px;
+left: 50%;
+transform: translateX(-50%);
+width: 10px;
+height: 40px;
+background: linear-gradient(to bottom, #ff6b6b 0%, #ff8787 100%);
+border-radius: 2px;
+opacity: 0;
+animation: candleAppear 0.5s ease-out 2.8s forwards;
+}
+@keyframes candleAppear {
+to {
+opacity: 1;
+}
+}
+.wick {
+position: absolute;
+top: -6px;
+left: 50%;
+transform: translateX(-50%);
+width: 2px;
+height: 6px;
+background: #333;
+}
+/* Flame */
+.flame {
+position: absolute;
+top: -20px;
+left: 50%;
+transform: translateX(-50%);
+width: 12px;
+height: 18px;
+background: #ffd700;
+border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+box-shadow: 0 0 15px #ffd700, 0 0 25px #ff6b6b;
+animation: flicker 0.3s ease-in-out 3.3s infinite alternate, flameAppear 0.5s ease-out 3.3s forwards;
+opacity: 0;
+}
+@keyframes flameAppear {
+to {
+opacity: 1;
+}
+}
+@keyframes flicker {
+0% {
+transform: translateX(-50%) scaleY(1);
+}
+100% {
+transform: translateX(-50%) scaleY(1.1);
+}
+}
+.flame::before {
+content: '';
+position: absolute;
+top: 3px;
+left: 50%;
+transform: translateX(-50%);
+width: 7px;
+height: 10px;
+background: #ff6b6b;
+border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+/* Text */
+h1 {
+color: #558ee2;
+font-size: 2.5em;
+margin-top: 40px;
+opacity: 0;
+animation: textAppear 1s ease-out 3.8s forwards;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+font-weight: 300;
+font-style: italic;
+}
+.wish {
+    color: rgb(243, 230, 45);
+    font-size: 1.1em;
+    margin-top: 20px;
+    opacity: 0;
+    font-weight: 300;
+    line-height: 1.4;
+    animation: textAppear 1s ease-out 4.8s forwards;
+    text-shadow: 1px 1px 3px rgb(255, 255, 255);
+}
+@keyframes textAppear {
+to {
+opacity: 1;
+}
+}
+/* Confetti */
+.confetti {
+position: absolute;
+width: 8px;
+height: 8px;
+background: #ffd700;
+opacity: 0;
+animation: confettiFall 3s ease-out 4.5s infinite;
+}
+@keyframes confettiFall {
+0% {
+opacity: 1;
+transform: translateY(-100px) rotate(0deg);
+}
+100% {
+opacity: 0;
+transform: translateY(600px) rotate(720deg);
+}
+}
+.confetti:nth-child(1) { left: 10%; background: #ff6b6b; animation-delay: 4.5s; }
+.confetti:nth-child(2) { left: 20%; background: #ffd700; animation-delay: 4.7s; }
+.confetti:nth-child(3) { left: 30%; background: #4ecdc4; animation-delay: 4.9s; }
+.confetti:nth-child(4) { left: 40%; background: #ff6b6b; animation-delay: 5.1s; }
+.confetti:nth-child(5) { left: 50%; background: #95e1d3; animation-delay: 5.3s; }
+.confetti:nth-child(6) { left: 60%; background: #ffd700; animation-delay: 5.5s; }
+.confetti:nth-child(7) { left: 70%; background: #ff6b6b; animation-delay: 5.7s; }
+.confetti:nth-child(8) { left: 80%; background: #4ecdc4; animation-delay: 5.9s; }
+.confetti:nth-child(9) { left: 90%; background: #ffd700; animation-delay: 6.1s; }
+</style>
+</head>
+<body>
+<div class="curtain-container" id="curtainContainer">
+<div class="curtain-left"></div>
+<div class="curtain-right"></div>
+</div>
+<div class="bow-container" id="bowContainer">
+    <span class="emoji-bow" role="img" aria-label="Ribbon Bow">🧸</span>
+</div>
+<audio id="birthdaySong" loop>
+<source src="birthday-song.mp3" type="audio/mpeg">
+<source src="birthday-song.ogg" type="audio/ogg">
+Your browser does not support the audio element.
+</audio>
+<div class="container">
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="confetti"></div>
+<div class="cake-container">
+<div class="cake">
+<div class="layer layer-top">
+<div class="frosting">
+<div class="frosting-drip drip1"></div>
+<div class="frosting-drip drip2"></div>
+<div class="frosting-drip drip3"></div>
+<div class="frosting-drip drip4"></div>
+<div class="frosting-drip drip5"></div>
+</div>
+<div class="candle">
+<div class="wick"></div>
+<div class="flame"></div>
+</div>
+</div>
+<div class="layer layer-middle"></div>
+<div class="layer layer-bottom"></div>
+</div>
+<div class="plate"></div>
+</div>
+<h1>happy birthday Deepa!🥳</h1>
+<p class="wish">✨ hope today gives you everything you were secretly wishing for<br>enjoy every second na you deserve the best fr ✨</p>
+</div>
+<script>
+// Get elements
+const body = document.body;
+const bowContainer = document.getElementById('bowContainer');
+const audio = document.getElementById('birthdaySong');
+// Open curtains when bow is clicked
+bowContainer.addEventListener('click', function() {
+  // 1. Trigger the main CSS transition (Curtains slide, Emoji bow fades out via CSS)
+  body.classList.add('curtain-open');
+ 
+  // 2. Play audio
+  audio.play().then(function() {
+    console.log('Audio playing successfully! 🎵');
+  }).catch(function(error) {
+    console.error('Error playing audio:', error);
+    alert('Could not play audio. Please check if the audio file exists in the same folder.');
+  });
+});
+</script>
+</body>
+</html>
