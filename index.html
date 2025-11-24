@@ -19,7 +19,7 @@ min-height: 100vh;
 font-family: 'Arial', sans-serif;
 overflow: hidden;
 }
-/* Curtain Container */
+
 .curtain-container {
 position: fixed;
 top: 0;
@@ -29,7 +29,7 @@ height: 100%;
 z-index: 9999;
 pointer-events: none;
 }
-/* Left Curtain */
+
 .curtain-left {
 position: absolute;
 top: 0;
@@ -41,7 +41,7 @@ box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
 transition: transform 1.5s ease-in-out;
 z-index: 10000;
 }
-/* Right Curtain */
+
 .curtain-right {
 position: absolute;
 top: 0;
@@ -53,7 +53,7 @@ box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
 transition: transform 1.5s ease-in-out;
 z-index: 10000;
 }
-/* Curtain folds effect */
+
 .curtain-left::before,
 .curtain-right::before {
 content: '';
@@ -69,7 +69,7 @@ rgba(0, 0, 0, 0.05) 40px,
 rgba(0, 0, 0, 0.05) 80px
 );
 }
-/* Clickable Emoji Container */
+
 .bow-container {
 position: fixed;
 top: 50%;
@@ -79,11 +79,11 @@ z-index: 10001;
 cursor: pointer;
 pointer-events: all;
 animation: shake 0.8s ease-in-out infinite;
-/* Flex properties to center the emoji if it were multiple elements */
+
 display: flex;
 justify-content: center;
 align-items: center;
-/* No fixed width/height needed here, emoji will define size */
+
 }
 @keyframes shake {
 0%, 100% {
@@ -96,27 +96,25 @@ transform: translate(-50%, -50%) rotate(-5deg);
 transform: translate(-50%, -50%) rotate(5deg);
 }
 }
-/* 🎀 START OF EMOJI BOW STYLES 🎀 */
-/* The element that contains the actual emoji */
+
 .emoji-bow {
-    font-size: 100px; /* Make the emoji very large */
-    line-height: 1; /* Ensure it doesn't add extra space */
-    text-shadow: 2px 2px 8px lightgoldenrodyellow; /* Soft pink shadow */
+    font-size: 100px; 
+    line-height: 1; 
+    text-shadow: 2px 2px 8px lightgoldenrodyellow; 
     transition: transform 0.2s ease-out;
 }
-/* Add a slight effect on hover */
+
 .bow-container:hover .emoji-bow {
     transform: scale(1.1);
 }
-/* 🎀 END OF EMOJI BOW STYLES 🎀 */
-/* Open curtains */
+
 .curtain-open .curtain-left {
 transform: translateX(-100%);
 }
 .curtain-open .curtain-right {
 transform: translateX(100%);
 }
-.curtain-open .bow-container { /* This will fade out the emoji bow */
+.curtain-open .bow-container { 
 opacity: 0;
 pointer-events: none;
 transition: opacity 0.5s ease-out;
@@ -129,7 +127,7 @@ position: relative;
 position: relative;
 margin: 50px auto;
 }
-/* Plate */
+
 .plate {
 width: 280px;
 height: 12px;
@@ -158,7 +156,7 @@ opacity: 1;
 transform: translateY(0);
 }
 }
-/* Cake Layers */
+
 .cake {
 position: relative;
 margin: 0 auto;
@@ -197,7 +195,7 @@ opacity: 1;
 transform: translateY(0) scale(1);
 }
 }
-/* Frosting - matching original image */
+
 .frosting {
 position: absolute;
 top: -5px;
@@ -216,7 +214,7 @@ background: #F5DEB3;
 border-radius: 0 0 8px 8px;
 top: 8px;
 }
-/* Varied drip sizes to match original */
+
 .drip1 {
 left: 25px;
 width: 20px;
@@ -247,7 +245,7 @@ to {
 opacity: 1;
 }
 }
-/* Candle */
+
 .candle {
 position: absolute;
 top: -50px;
@@ -274,7 +272,7 @@ width: 2px;
 height: 6px;
 background: #333;
 }
-/* Flame */
+
 .flame {
 position: absolute;
 top: -20px;
@@ -312,7 +310,7 @@ height: 10px;
 background: #ff6b6b;
 border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
 }
-/* Text */
+
 h1 {
 color: #558ee2;
 font-size: 2em;
@@ -338,7 +336,7 @@ to {
 opacity: 1;
 }
 }
-/* Confetti */
+
 .confetti {
 position: absolute;
 width: 8px;
@@ -412,19 +410,18 @@ Your browser does not support the audio element.
 <div class="plate"></div>
 </div>
 <h1>happy birthday Deepa!🥳</h1>
-<p class="wish">✨ hope all your secret wishes come true today!<br>enjoy every second na you deserve the best fr ✨</p>
+<p class="wish">✨ hope all your secret wishes come true today!<br>enjoy every sec na you deserve the best fr ✨</p>
 </div>
 <script>
-// Get elements
+
 const body = document.body;
 const bowContainer = document.getElementById('bowContainer');
 const audio = document.getElementById('birthdaySong');
-// Open curtains when bow is clicked
+
 bowContainer.addEventListener('click', function() {
-  // 1. Trigger the main CSS transition (Curtains slide, Emoji bow fades out via CSS)
+  
   body.classList.add('curtain-open');
  
-  // 2. Play audio
   audio.play().then(function() {
     console.log('Audio playing successfully! 🎵');
   }).catch(function(error) {
@@ -436,4 +433,5 @@ bowContainer.addEventListener('click', function() {
 </body>
 
 </html>
+
 
